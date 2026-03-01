@@ -1,0 +1,44 @@
+[project]
+name = "hr-chatbot"
+version = "0.1.0"
+description = "Agentic RAG-based HR Chatbot for Resume Matching"
+requires-python = ">=3.10"
+authors = [{name = "HR Team", email = "hr@example.com"}]
+
+dependencies = [
+    "fastapi==0.104.1",
+    "uvicorn[standard]==0.24.0",
+    "pydantic==2.4.2",
+    "pydantic-settings==2.0.3",
+    "langchain==0.0.352",
+    "langgraph==0.0.20",
+    "httpx==0.25.1",
+    "python-docx==0.8.11",
+    "pypdf==3.17.1",
+    "pdf2image==1.16.3",
+    "pytesseract==0.3.10",
+    "python-pptx==0.6.23",
+    "pageindex>=0.1.0",
+    "sqlalchemy==2.0.23",
+    "python-jose[cryptography]==3.3.0",
+    "passlib[bcrypt]==1.7.4",
+    "python-multipart==0.0.6",
+    "aiofiles==23.2.1",
+    "email-validator==2.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==7.4.3",
+    "pytest-asyncio==0.21.1",
+    "black==23.12.0",
+    "ruff==0.1.8",
+    "mypy==1.7.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+python = "3.10"
