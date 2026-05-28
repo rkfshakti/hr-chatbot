@@ -27,6 +27,11 @@
       "react-app"
     ]
   },
+  "overrides": {
+    "qs": ">=6.15.2",
+    "fast-uri": ">=3.1.2",
+    "@babel/plugin-transform-modules-systemjs": ">=7.29.4"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
