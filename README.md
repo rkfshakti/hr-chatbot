@@ -341,4 +341,4 @@ Private project for HR recruitment
 
 ## Support
 
-For issues or questions, contact the development Shakti.
+For issues or questions, contact the developer Shakti.
