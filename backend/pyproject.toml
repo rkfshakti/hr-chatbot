@@ -14,7 +14,7 @@ dependencies = [
     "langgraph==1.2.2",
     "httpx==0.28.1",
     "python-docx==0.8.11",
-    "pypdf==6.10.2",
+    "pypdf==6.21.2",
     "pdf2image==1.16.3",
     "pytesseract==0.3.10",
     "python-pptx==0.6.23",
@@ -31,7 +31,7 @@ dependencies = [
 dev = [
     "pytest==9.0.3",
     "pytest-asyncio==0.21.1",
-    "black==26.3.1",
+    "black==26.10.1",
     "ruff==0.1.8",
     "mypy==1.7.1",
 ]
