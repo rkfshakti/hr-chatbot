@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install dependencies
+        run: uv sync --extra dev
+      - name: App import smoke test
+        run: uv run python -c "import app"
+      - name: Auth round-trip smoke test
+        run: |
+          uv run python -c "
+          from auth.auth import create_access_token, decode_token, get_password_hash, verify_password
+          t = create_access_token('ci', 'ci@example.com', 'admin')
+          assert decode_token(t) and decode_token(t).role == 'admin'
+          assert decode_token('not.a.token') is None
+          h = get_password_hash('RoundTrip123!')
+          assert verify_password('RoundTrip123!', h)
+          print('auth OK')
+          "
+      - name: Hermetic unit tests
+        run: uv run pytest -q test_matcher_debug.py
+      # test_e2e.py and test_llm.py are manual smoke tests: they require a
+      # running server (localhost:8000) and a local LLM endpoint.
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      # CRA fails the build on any lint warning when CI=true; the default
+      # GitHub runner environment sets it. Warnings are advisory.
+      - name: Build
+        run: CI=false npm run build
