@@ -2,43 +2,51 @@
 name = "hr-chatbot"
 version = "0.1.0"
 description = "Agentic RAG-based HR Chatbot for Resume Matching"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 authors = [{name = "HR Team", email = "hr@example.com"}]
 
 dependencies = [
-    "fastapi==0.104.1",
-    "uvicorn[standard]==0.24.0",
-    "pydantic==2.13.4",
-    "pydantic-settings==2.14.1",
-    "langchain==1.3.2",
-    "langgraph==1.2.2",
+    "fastapi==0.162.7",
+    "uvicorn[standard]==0.54.0",
+    "pydantic==2.14.3",
+    "pydantic-settings==2.16.3",
+    "langchain==1.3.9",
+    "langgraph==1.2.21",
     "httpx==0.28.1",
-    "python-docx==0.8.11",
-    "pypdf==6.10.2",
-    "pdf2image==1.16.3",
-    "pytesseract==0.3.10",
-    "python-pptx==0.6.23",
+    "python-docx==1.2.0",
+    "pypdf==6.21.4",
+    "pdf2image==1.17.0",
+    "pytesseract==0.3.13",
+    "python-pptx==1.0.2",
     "pageindex>=0.1.0",
-    "sqlalchemy==2.0.23",
-    "python-jose[cryptography]==3.3.0",
-    "passlib[bcrypt]==1.7.4",
-    "python-multipart==0.0.27",
-    "aiofiles==23.2.1",
-    "email-validator==2.1.0",
+    "sqlalchemy==2.1.8",
+    "pyjwt==2.15.1",
+    "bcrypt==5.0.0",
+    "python-multipart==0.0.33",
+    "aiofiles==25.1.0",
+    "email-validator==2.3.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest==9.0.3",
-    "pytest-asyncio==0.21.1",
-    "black==26.3.1",
-    "ruff==0.1.8",
-    "mypy==1.7.1",
+    "pytest==9.2.0",
+    "pytest-asyncio==1.5.0",
+    "black==26.10.1",
+    "ruff==0.17.5",
+    "mypy==2.4.1",
 ]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
 [tool.uv]
-python = "3.10"
+package = false
+override-dependencies = [
+    "pillow>=13.0.0",
+    "cryptography>=50.0.0",
+    "dnspython>=2.9.0",
+]
