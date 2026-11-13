@@ -30,6 +30,12 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: eslint
         update-types: ["version-update:semver-major"]
+      # Tailwind 4 is a new engine with a different config format; the
+      # CRA/tailwind 3 setup migrates deliberately. date-fns 4 changes APIs.
+      - dependency-name: tailwindcss
+        update-types: ["version-update:semver-major"]
+      - dependency-name: date-fns
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
