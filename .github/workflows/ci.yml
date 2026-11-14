@@ -15,8 +15,8 @@ jobs:
       run:
         working-directory: backend
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - name: Install dependencies
         run: uv sync --extra dev
       - name: App import smoke test
@@ -43,12 +43,16 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm ci
+        # package-lock.json is generated with npm 11; older bundled npm
+        # cannot install locks produced by it (yaml@2.9.1 resolution).
+        run: |
+          npm install -g npm@11
+          npm ci
       # CRA fails the build on any lint warning when CI=true; the default
       # GitHub runner environment sets it. Warnings are advisory.
       - name: Build

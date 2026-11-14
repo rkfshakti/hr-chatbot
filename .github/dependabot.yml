@@ -7,6 +7,11 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
+    ignore:
+      # pypdf 7.x is a major API change; the patched 6.x line is the
+      # deliberate choice here. Revisit with a dedicated migration PR.
+      - dependency-name: pypdf
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /frontend
     schedule:
@@ -14,6 +19,23 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
+    ignore:
+      # react-scripts 5.0.1 (deprecated, pinned) requires the React 18 /
+      # eslint 8 era. Major bumps of these belong to the Vite migration.
+      - dependency-name: react-dom
+        update-types: ["version-update:semver-major"]
+      - dependency-name: react
+        update-types: ["version-update:semver-major"]
+      - dependency-name: zustand
+        update-types: ["version-update:semver-major"]
+      - dependency-name: eslint
+        update-types: ["version-update:semver-major"]
+      # Tailwind 4 is a new engine with a different config format; the
+      # CRA/tailwind 3 setup migrates deliberately. date-fns 4 changes APIs.
+      - dependency-name: tailwindcss
+        update-types: ["version-update:semver-major"]
+      - dependency-name: date-fns
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
